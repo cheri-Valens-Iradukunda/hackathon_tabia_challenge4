@@ -5,13 +5,20 @@ import skills from '../../images/c39882f27931c9a722c55351a433658d5bec88d2.png'
 
 export const Careers = () => {
 
+    const card = (image,name,number) => {
 
-    return <div>
-        <div className='bg-white'>
-            <img src={career} alt="Career icon" />
-            <h3>Careers</h3>
-            <p>10,000+</p>
+        return <div className='bg-white rounded p-5 space-y-3 text-center'>
+            <img src={image} alt="Career icon" className='w-20 mx-auto' />
+            <h3 className='text-2xl font-semibold'>{name}</h3>
+            <p className='text-xl font-semibold'>{number}+</p>
         </div>
+    }
+
+    return <div className='grid grid-cols-4 w-[90vw] gap-5  mx-auto '>
+        {card(career,'Career',"10,000")}
+        {card(ocupation,'Ocupation',"5,000")}
+        {card(resources,'Resource',"10,000")}
+        {card(skills,'Skills',"20,000")}
     </div>
 
 }
