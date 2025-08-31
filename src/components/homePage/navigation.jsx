@@ -8,8 +8,8 @@ export const Navigation = () =>{
         <img src={logo} className='w-40 px-5 py-3' alt="" />
         <ul className='flex gap-16 justify-end me-5 font-[500] text-sm'>
             <li><a href="#" className='text-[#71C55D] '>Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Service</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Service</a></li>
             <li><a href="#">Instant guidance</a></li>
         </ul>
     </div>

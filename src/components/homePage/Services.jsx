@@ -14,7 +14,7 @@ export const Services = () => {
         </div>
     }
 
-    return <div className="w-8/9 mx-auto space-y-5">
+    return <div className="w-8/9 mx-auto space-y-5" id="services">
 
         <h2 className="capitalize text-center text-2xl font-semibold font-intel">check our <span className="text-[#71C55D]">services</span></h2>
         <div className="grid grid-cols-3 gap-5">

@@ -1,5 +1,6 @@
 import { About } from "./About"
 import { Careers } from "./Careers"
+import { Footer } from "./Footer"
 import { Navigation } from "./navigation"
 import { Services } from "./Services"
 import { InputTest } from "./test"
@@ -13,6 +14,7 @@ export const HomeFullContainer = () => {
         <Careers />
         <About />
         <Services />
+        <Footer />
     </div>
 
 }
