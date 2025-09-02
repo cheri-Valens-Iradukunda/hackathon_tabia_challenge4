@@ -4,11 +4,11 @@ import ThirdImage from '../../images/eda60ab3036eeebd8e57003ca3787b198d6e5dc4.jp
 
 export const About = () => {
 
-    return <div className="grid grid-cols-2 gap-[5vw] items-center w-full bg-white p-10" id='about'>
+    return <div className="grid grid-cols-1 sm:grid-cols-2 gap-[5vw] items-center w-full bg-white p-10" id='about'>
         <div className='space-y-10'>
             <h4 className='text-gray-500 font-semibold'>About us</h4>
             <h2 className='font-bold text-2xl text-gray-700'>Who are we</h2>
-            <p className='text-xl'>Tabiya builds <span className='font-semibold text-[#020235]'> open-source software and standards to unlock economic opportunity
+            <p className='text-md xs:text-lg sm:text-xl'>Tabiya builds <span className='font-semibold text-[#020235]'> open-source software and standards to unlock economic opportunity
                  for all.</span> We partner with government employment services, NGOs, and job platforms to create 
                  pathways that recognize skills from all work – including informal and traditionally unseen 
                  activities. Our mission is to make labor markets more efficient, equitable, and inclusive.

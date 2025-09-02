@@ -5,4 +5,5 @@
 @theme {
   --font-cumar: "Kumar One", serif; 
   --font-intel: "Inter", sans-serif; 
+  --breakpoint-xs: 480px;
 }
