@@ -3,7 +3,7 @@ const Arrays =({id,title,description, resource,links}) =>{
       return (
     
         <div className="border-2 border-green-300 space-y-3 p-5 rounded-2xl  break-words shadow-xl shadow-gray-300"> 
-            <h2 className="font-semibold text-2xl pt-5 pb-2">{title}</h2>
+            <h2 className="font-semibold text-2xl pt-3 pb-2">{title}</h2>
             <p>{description}</p>
             <p className="font-semibold text-xl underline">{resource}</p>
             <p className="cursor-pointer hover:underline decoration-1">{links}</p>
@@ -26,8 +26,8 @@ const Arrays =({id,title,description, resource,links}) =>{
     ]
     return (
         <>
-        <p className="font-bold text-3xl text-center p-8">Software Development</p>
-       <div className="gap-6 p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 w-[90%] mx-auto">
+        <p className="font-bold text-3xl text-center pt-8 pb-4">Software Development</p>
+       <div className="gap-6 p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 w-[90%] h-auto mx-auto">
         
       {data.map((item) => (
         <Arrays
@@ -38,6 +38,19 @@ const Arrays =({id,title,description, resource,links}) =>{
           links={item.links} 
         />
       ))}
+    </div>
+    <div>
+      <div className="px-10 py-4 w-[90%] mx-auto  flex items-center justify-between">
+
+      <button className="border border-gray-500 bg-lime-900 p-3 rounded-full font-semibold text-white cursor-pointer">Previous</button>
+      <div className="flex space-x-1.5">
+        <div className="bg-green-300 border border-lime-400 cursor-pointer w-8 h-8 rounded-full flex items-center justify-center">1</div>
+        <div className="bg-green-300 border border-lime-400 cursor-pointer w-8 h-8 rounded-full flex items-center justify-center">2</div>
+        <div className="bg-green-300 border border-lime-400 cursor-pointer w-8 h-8 rounded-full flex items-center justify-center">3</div>
+        <div className="bg-green-300 border border-lime-400 cursor-pointer w-8 h-8 rounded-full flex items-center justify-center">4</div>
+      </div>
+      <button className="border border-gray-500 bg-lime-500 py-3 px-6 rounded-4xl font-semibold text-white cursor-pointer">Next</button>
+      </div>
     </div>
         </>
     )
