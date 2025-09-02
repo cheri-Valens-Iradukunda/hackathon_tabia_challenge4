@@ -3,7 +3,7 @@ import image from '../../images/816ba957f5c483074f2e96bb588843f9269a1f72.png'
 export const TopContainer = () => {
 
 
-    return <div className="grid grid-cols-1 sm:grid-cols-2 w-[80vw] my-[10vh] gap-10 mx-auto items-center">
+    return <div className="grid grid-cols-1  sm:grid-cols-2 w-[80vw] my-[20vh] gap-10 mx-auto items-center">
         
         <img src={image} alt="Computer image" className='block sm:hidden w-1/2' />
         <div className='space-y-5'>
