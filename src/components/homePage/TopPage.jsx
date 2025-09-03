@@ -8,7 +8,9 @@ export const TopContainer = () => {
         <img src={image} alt="Computer image" className='block sm:hidden w-1/2' />
         <div className='space-y-5'>
             <h2 className="text-5xl sm:text-7xl font-cumar">Tabia</h2>
-            <p className='text-sm sm:text-2xl'>Open-source solution  for economic opportunity</p>
+            <p className='text-sm sm:text-2xl'>Open-source solution  for economic opportunity. <br />
+                Find your shortest path from skills to careers
+            </p>
             <button className="bg-[#71C55D] w-1/2 py-2 rounded-full text-lg sm:text-xl text-white">Get Started</button>
         </div>
         <img src={image} alt="Computer image" className='hidden sm:block' />

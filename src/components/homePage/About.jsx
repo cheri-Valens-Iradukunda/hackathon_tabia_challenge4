@@ -4,7 +4,7 @@ import ThirdImage from '../../images/eda60ab3036eeebd8e57003ca3787b198d6e5dc4.jp
 
 export const About = () => {
 
-    return <div className="grid grid-cols-1 sm:grid-cols-2 gap-[5vw] items-center w-full bg-white p-10" id='about'>
+    return <div className="grid grid-cols-1 sm:grid-cols-2 gap-[5vw] mt-14 items-center w-full bg-white p-10" id='about'>
         <div className='space-y-10'>
             <h4 className='text-gray-500 font-semibold'>About us</h4>
             <h2 className='font-bold text-2xl text-gray-700'>Who are we</h2>

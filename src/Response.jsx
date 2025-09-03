@@ -2,7 +2,7 @@
 const Arrays =({id,title,description, resource,links}) =>{
       return (
     
-        <div className="border-2 border-green-300 space-y-3 p-5 rounded-2xl  break-words shadow-xl shadow-gray-300"> 
+        <div className="border-2 border-green-300 space-y-3 p-5 rounded-2xl bg-white break-words shadow-xl shadow-gray-300"> 
             <h2 className="font-semibold text-2xl pt-3 pb-2">{title}</h2>
             <p>{description}</p>
             <p className="font-semibold text-xl underline">{resource}</p>

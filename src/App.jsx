@@ -11,8 +11,11 @@ function App() {
     <div className="fixed w-full top-0">
         <Navigation/>
     </div>
+    <div className='mt-50'>
+
       <HomeFullContainer />
-    <Response/>
+    </div>
+    {/* <Response/> */}
     <Footer />
     </>
   )

@@ -14,10 +14,10 @@ export const Services = () => {
         </div>
     }
 
-    return <div className="w-8/9 mx-auto space-y-5" id="services">
+    return <div className="w-8/9 mx-auto space-y-5 mb-10" id="services">
 
-        <h2 className="capitalize text-center text-2xl font-semibold font-intel">check our <span className="text-[#71C55D]">services</span></h2>
-        <div className="grid grid-cols-3 gap-5">
+        <h2 className="capitalize text-center text-2xl pt-22 font-semibold font-intel">check our <span className="text-[#71C55D]">services</span></h2>
+        <div className="grid xs:grid-cols-2 grid-cols-1 sm:grid-cols-3 gap-5 mt-10">
             {card(icon1,'Career orientation',`Lorem ipsum, placeholder or dummy used in typesetting and graphic design for previewing layouts.`)}
             {card(icon2,'Resource provision',`Lorem ipsum, placeholder or dummy text used in typesetting and graphic design for previewing layouts.`)}
             {card(icon3,'Career guidance',`Lorem ipsum, placeholder or dummy text used in typesetting and graphic design for previewing layouts.`)}
