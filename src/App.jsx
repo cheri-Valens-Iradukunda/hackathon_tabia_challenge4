@@ -12,7 +12,7 @@ function App() {
         <Navigation/>
     </div>
       <HomeFullContainer />
-    <Response/>
+    {/* <Response/> */}
     <Footer />
     </>
   )

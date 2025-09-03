@@ -14,12 +14,12 @@ export const Footer = () => {
         </div>
     }
 
-    return <div className="bg-[#EBEBEB] h-fit text-center mt-20 space-y-5 p-20">
-        <h2 className="text-[#71C55D] capitalize text-4xl font-bold ">let's connect</h2>
-        <p className="w-2/3 mx-auto text-gray-700 text-lg">Whether you're looking to learn more, explore a partnership, 
+    return <div className="bg-[#EBEBEB] h-fit text-center mt-20 space-y-5 p-5 sm:p-20">
+        <h2 className="text-[#71C55D] capitalize text-3xl sm:text-4xl font-bold ">let's connect</h2>
+        <p className="sm:w-2/3 w-full mx-auto text-gray-700 xs:text-md sm:text-lg">Whether you're looking to learn more, explore a partnership, 
             or support our mission to build digital public infrastructure for youth employment, we’d love to connect.</p>
         
-        <div className="grid grid-cols-3 m-10 ">
+        <div className="grid xs:grid-cols-2 sm:grid-cols-3 m-10 space-y-10 ">
             {card(
                 "Request A Demo",
                 image1,
