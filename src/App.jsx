@@ -1,13 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { Footer } from './components/homePage/Footer'
+import { HomeFullContainer } from './components/homePage/FullContainer'
+import { Navigation } from './components/homePage/navigation'
+import Response from './Response'
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
+    <div className="fixed w-full z-15 top-0">
+        <Navigation/>
+    </div>
+      <HomeFullContainer />
+    {/* <Response/> */}
+    <Footer />
     </>
   )
 }
