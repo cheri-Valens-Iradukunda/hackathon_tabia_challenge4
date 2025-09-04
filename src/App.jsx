@@ -12,7 +12,10 @@ function App() {
     <div className="fixed w-full z-15 top-0">
         <Navigation/>
     </div>
+    <div className='mt-50'>
+
       <HomeFullContainer />
+    </div>
     {/* <Response/> */}
     <Footer />
     </>

@@ -5,12 +5,12 @@ export const Footer = () => {
 
     let card = (head,image,name,position) => {
 
-        return <div className="[&>*]:mx-auto space-y-2">
-            <h2 className="text-2xl font-semibold text-gray-800">{head}</h2>
+        return <div className="[&>*]:mx-auto space-y-2 bg-white h-fit w-[90vw] xs:w-full p-5">
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">{head}</h2>
             <img src={image} alt="" className="w-20 rounded-full" />
-            <h3 className="text-xl font-semibold">{name}</h3>
+            <h3 className="text-lg sm:text-xl font-semibold">{name}</h3>
             <p>{position}</p>
-                <a href="#" className="underline">Email {name.split(" ")[0]}</a>
+                <a href="#" className="underline text-[#3c3ca2] font-semibold">Email {name.split(" ")[0]}</a>
         </div>
     }
 
