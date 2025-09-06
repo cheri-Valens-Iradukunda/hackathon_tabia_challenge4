@@ -1,7 +1,7 @@
+import { useState } from 'react'
 import image from '../../images/816ba957f5c483074f2e96bb588843f9269a1f72.png'
 
 export const TopContainer = () => {
-
 
     return <div className="grid grid-cols-1  sm:grid-cols-2 w-[80vw] my-[20vh] gap-10 mx-auto items-center">
         
