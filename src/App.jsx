@@ -4,7 +4,7 @@ import { Footer } from './components/homePage/Footer'
 import { HomeFullContainer } from './components/homePage/FullContainer'
 import { Navigation } from './components/homePage/navigation'
 import Response from './Response'
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 function App() {
@@ -16,12 +16,11 @@ function App() {
         <Navigation/>
     </div>
     <div className='mt-50'>
-   <Switch>
+   <Routes>
 
-      <Route path="/instant" ><Response /></Route>
-      <Route path='/'><HomeFullContainer /></Route>
-      <HomeFullContainer />
-    </Switch>
+      <Route path="/instant" element={<Response />} />
+      <Route path='/' element={<HomeFullContainer />} />
+    </Routes>
     </div>
     {/* <Response/> */}
     {/* <Footer /> */}
