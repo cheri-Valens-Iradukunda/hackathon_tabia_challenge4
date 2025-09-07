@@ -16,8 +16,7 @@ const Arrays =({id,title,description, resource,links}) =>{
 };
 
  function Response(){
-  const [isPopUp,setIsPopUp] = useState(false)
-    const data=[
+  const datas=[
         {id:1,title:"HTML",description:"find your path  your path   world carrer why you shouldn't do this it's easy you by approaching real  world carrer why you shouldn't do this it's easy you can build your own empire", resource:"Resources:",links:["https://www.instagram.com/reels/DNKx6H0upgv/","https://www.instagram.com/reels/DNKx6H0upgv/"]},
         {id:2,title:"CSS",description:"find path  your path do this it's easy you your path by approaching real   your path by approaching real world carrer", resource:"Resources:",links:["https://www.instagram.com/reels/DNKx6H0upgv/","https://www.instagram.com/reels/DNKx6H0upgv/"]},
         {id:3,title:"JavaScript",description:"find  path  your path do this it's easy you your path by approaching real  your path by approaching real world carrer", resource:"Resources:",links:["https://www.instagram.com/reels/DNKx6H0upgv/","https://www.instagram.com/reels/DNKx6H0upgv/"]},
@@ -29,12 +28,17 @@ const Arrays =({id,title,description, resource,links}) =>{
         {id:8,title:"Node.js",description:"find your path  your path do this it's easy you your path by approaching real   path by approaching real world carrer", resource:"Resources:",links:["https://www.instagram.com/reels/DNKx6H0upgv/","https://www.instagram.com/reels/DNKx6H0upgv/"]},
 
     ]
+  const [isPopUp,setIsPopUp] = useState(false)
+  const [data,setData ] = useState(datas)
+    
     return (
         <>
         <div className="flex justify-end me-5">
-          <button onClick={() => setIsPopUp(!isPopUp)} className="text-white bg-green-700 px-5 py-2 text-xl me-0 rounded-xl">Search</button>
+          <button onClick={() => {setIsPopUp(!isPopUp);
+            document.getElementById('popup').style.height="100vh"
+          }} className="text-white bg-green-700 px-5 py-2 text-xl me-0 rounded-xl">Search</button>
         </div>
-        <div className={`${isPopUp ? "block" : "hidden"} bg-gradient-to-br p-5 from-blue-500/25 to-green-500/25  z-100 h-screen w-screen backdrop-blur-lg fixed top-0`}>
+        <div id="popup" className={`${isPopUp ? "block" : "hidden"} bg-gradient-to-br transition-all duration-700 p-5 from-blue-500/25 to-green-500/25  z-100 h-0 w-screen backdrop-blur-lg fixed top-0`}>
           <LogForm isPopUp = {setIsPopUp}/>
         </div>
         <p className="font-bold text-3xl text-center pt-8 pb-4">Software Development</p>

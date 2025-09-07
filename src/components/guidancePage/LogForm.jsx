@@ -6,6 +6,7 @@ const LogForm = (props) => {
   const [career,setCareer] = useState("");
   const [skill,setSkill] = useState("");
   const [skills,setSkills] = useState([])
+  const careers = ['software development',"Networking","Programming"]
 
   let handleAddSkill = () =>{
     setSkills(current => [...current, skill])
@@ -46,15 +47,25 @@ const LogForm = (props) => {
         <div className='md:col-span-2 grid grid-rows-2 h-fit space-y-4 '>
 
           <div className='space-y-4'>
-            {guidanceSkills && (
-              <input
-                type="text"
-                placeholder='Select Career'
-                className='bg-gray-300 px-4 outline-none py-2 rounded w-full'
-                onChange={e=>setCareer(e.target.value)}
-                value={career}
-              />
-            )}
+              {guidanceSkills && (
+              <div className='flex'>
+                <input
+                  type="text"
+                  placeholder='Select Career'
+                  className='bg-gray-300 px-4 outline-none py-2 rounded w-full'
+                  onChange={e=>setCareer(e.target.value)}
+                  value={career}
+                  list={career.length>3?"careers":""}
+                />
+                <datalist id='careers'>
+                  {
+                    careers.map((elem,index)=>(
+                      <option value={elem} key={index}>{elem}</option>
+                    ))
+                  }
+                </datalist>  
+              </div>
+              )}
             <div className='flex'>
 
               <input
@@ -93,7 +104,7 @@ const LogForm = (props) => {
         </div>
         <div>
           {guidanceSkills && (
-            <h3 className='text-xl font-semibold mb-2'>{handleChangeToCapital(career)}</h3>
+            <h3 className='text-xl font-semibold mb-2'>{career.length>4 && careers.includes(career)?handleChangeToCapital(career):"Choose a career"}</h3>
           )}
           <ol className='list-decimal list-inside space-y-1'>
             {skills.map((skill,index)=>(
