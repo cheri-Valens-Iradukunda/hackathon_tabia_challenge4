@@ -15,7 +15,7 @@ function App() {
     <div className="fixed w-full z-15 top-0">
         <Navigation/>
     </div>
-    <div className='mt-50'>
+    <div className='mt-27'>
    <Routes>
 
       <Route path="/instant" element={<Response />} />
@@ -23,7 +23,7 @@ function App() {
     </Routes>
     </div>
     {/* <Response/> */}
-    {/* <Footer /> */}
+    <Footer />
     </BrowserRouter>
     </>
   )
