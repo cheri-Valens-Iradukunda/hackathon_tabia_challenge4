@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Api } from '../../endpoints/Apis';
 // import { FaPlus } from 'react-icons/fa';
 
 const LogForm = (props) => {
@@ -6,12 +8,26 @@ const LogForm = (props) => {
   const [career,setCareer] = useState("");
   const [skill,setSkill] = useState("");
   const [skills,setSkills] = useState([])
-  const careers = ['software development',"Networking","Programming"]
+  const [careers,setCareers] = useState(['software development',"Networking","Programming"])
+
+  const searchSkill = async() =>{
+    
+    await axios.get(Api+"/api/occupations/search?q="+career).then(res=>{
+      setCareers(res.data)
+      console.log(res.data)
+    })
+
+  }
 
   let handleAddSkill = () =>{
     setSkills(current => [...current, skill])
     setSkill("")
   }
+  useEffect(()=>{
+    if(career.length>3){
+      searchSkill()
+    }
+  },[career])
   useEffect(()=>console.log(skills),[skills])
   let handleChangeToCapital = (career) => {
     return career.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
@@ -56,11 +72,13 @@ const LogForm = (props) => {
                   onChange={e=>setCareer(e.target.value)}
                   value={career}
                   list={career.length>3?"careers":""}
+                  options={careers}
+                  getOptionLabel={(option) => option.label}
                 />
                 <datalist id='careers'>
                   {
                     careers.map((elem,index)=>(
-                      <option value={elem} key={index}>{elem}</option>
+                      <option value={elem.label} key={index}>{elem.description}</option>
                     ))
                   }
                 </datalist>  
