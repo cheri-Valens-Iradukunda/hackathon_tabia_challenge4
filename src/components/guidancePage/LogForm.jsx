@@ -9,6 +9,7 @@ const LogForm = (props) => {
   const [careerSearch,setCareerSearch] = useState("")
   const [skill,setSkill] = useState("");
   const [skills,setSkills] = useState([])
+  const [skillSearch,setSkillSearch] = useState("")
   const [careers,setCareers] = useState([])
   const [selectedSkills,setSelectedSkills] = useState([])
 
@@ -30,7 +31,7 @@ const LogForm = (props) => {
   }
 
 
-  let handleAddSkill = () =>{
+  let handleAddSkill = (skill) =>{
     console.log(skill)
     setSelectedSkills(current => [...current, skill])
     setSkill("")
@@ -56,8 +57,21 @@ const LogForm = (props) => {
     setCareer("")
     setSkills([])
   }
+// {------------ RESEARCHING ACCORDING TO SKILLS ---------------}
+  // let handleSubmit = async() =>{
+  //   console.log(career)
+  //   let newSkills = skills.filter(elem=>selectedSkills.includes(elem.label)).map(elem=>elem.id)
+  //   console.log(newSkills)
+  //   const res = await axios.post(`${Api}/api/careerFromSkills`,newSkills);
+  //     console.log(res.data)
+  //   props.returnedOccupations(res.data)
+  //   props.selectedSkills(selectedSkills)
+  //   props.isPopUp(false)
+  // }
 
-  let handleSubmit = async() =>{
+// {------------ RESEARCHING ACCORDING TO CAREER ---------------}
+
+ let handleSubmit = async() =>{
     console.log(career)
     const res = await axios.post(`${Api}/api/careersFetch`,{career});
       console.log(res.data)
@@ -65,7 +79,8 @@ const LogForm = (props) => {
     props.selectedSkills(selectedSkills)
     props.isPopUp(false)
   }
-  return (
+
+return (
     <div className='w-full max-w-2xl bg-gray-200 mt-10 -z-2 mx-auto  overflow-hidden rounded-lg shadow'>
       <div className='w-full relative h-12 flex'>
         <button
@@ -126,16 +141,14 @@ const LogForm = (props) => {
                 list='skills'
                 value={skill}
               />
-              <datalist id='skills'>
+              <select id='skills' className='w-1/2' onChange={e=>handleAddSkill(e.target.value)}>
                 {
                   skills.map((elem,index)=>(
                     <option value={elem.label} key={index}>{elem.description}</option>
                   ))
                 }
-              </datalist>
-              <button onClick={handleAddSkill} className='bg-gray-400 py-2 px-3'>
-                Add
-              </button>
+              </select>
+              
             </div>
           </div>
           <div className='flex justify-between h-fit'>
