@@ -6,29 +6,48 @@ import { Api } from '../../endpoints/Apis';
 const LogForm = (props) => {
   const [guidanceSkills,setguidanceSkills] = useState(true);
   const [career,setCareer] = useState("");
+  const [careerSearch,setCareerSearch] = useState("")
   const [skill,setSkill] = useState("");
   const [skills,setSkills] = useState([])
-  const [careers,setCareers] = useState(['software development',"Networking","Programming"])
+  const [careers,setCareers] = useState([])
+  const [selectedSkills,setSelectedSkills] = useState([])
 
-  const searchSkill = async() =>{
-    
-    await axios.get(Api+"/api/occupations/search?q="+career).then(res=>{
+  const searchCareer = async() =>{
+    console.log(careerSearch)
+    await axios.get(Api+"/api/occupations/search?q="+careerSearch).then(res=>{
       setCareers(res.data)
       console.log(res.data)
     })
 
   }
+  const searchSkills = async() =>{
+    
+    await axios.get(Api+"/api/occupations/search?q="+career).then(res=>{
+      setSkills(res.data)
+      // console.log(res.data)
+    })
+
+  }
+
 
   let handleAddSkill = () =>{
-    setSkills(current => [...current, skill])
+    console.log(skill)
+    setSelectedSkills(current => [...current, skill])
     setSkill("")
+    console.log(selectedSkills)
   }
   useEffect(()=>{
-    if(career.length>3){
-      searchSkill()
+    if(careerSearch.length>3){
+      searchCareer()
     }
-  },[career])
-  useEffect(()=>console.log(skills),[skills])
+    console.log(career)
+  },[careerSearch])
+  useEffect(()=>{
+    if(skill.length>2){
+      searchSkills()
+      console.log("skills",skills)
+    }
+    },[skill])
   let handleChangeToCapital = (career) => {
     return career.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
   }
@@ -36,6 +55,15 @@ const LogForm = (props) => {
     setguidanceSkills(guidance)
     setCareer("")
     setSkills([])
+  }
+
+  let handleSubmit = async() =>{
+    console.log(career)
+    const res = await axios.post(`${Api}/api/careersFetch`,{career});
+      console.log(res.data)
+    props.returnedOccupations(res.data)
+    props.selectedSkills(selectedSkills)
+    props.isPopUp(false)
   }
   return (
     <div className='w-full max-w-2xl bg-gray-200 mt-10 -z-2 mx-auto  overflow-hidden rounded-lg shadow'>
@@ -64,24 +92,28 @@ const LogForm = (props) => {
 
           <div className='space-y-4'>
               {guidanceSkills && (
-              <div className='flex'>
+              <div className=''>
                 <input
                   type="text"
                   placeholder='Select Career'
                   className='bg-gray-300 px-4 outline-none py-2 rounded w-full'
-                  onChange={e=>setCareer(e.target.value)}
-                  value={career}
-                  list={career.length>3?"careers":""}
-                  options={careers}
-                  getOptionLabel={(option) => option.label}
+                  onChange={e=>setCareerSearch(e.target.value)}
+                  value={careerSearch}
                 />
-                <datalist id='careers'>
+                <select id="" onChange={e=>setCareer(e.target.value)} className='bg-gray-300 px-4 py-2 outline-none rounded-r'>
+                  {careers.map((elem, index) => (
+                    <option value={elem.id} key={index}>
+                      {elem.label}
+                    </option>
+                  ))}
+                </select>
+                {/* <datalist id='careers'>
                   {
                     careers.map((elem,index)=>(
                       <option value={elem.label} key={index}>{elem.description}</option>
                     ))
                   }
-                </datalist>  
+                </datalist>   */}
               </div>
               )}
             <div className='flex'>
@@ -95,10 +127,11 @@ const LogForm = (props) => {
                 value={skill}
               />
               <datalist id='skills'>
-                <option value="html">Html</option>
-                <option value="css">Css</option>
-                <option value="javascript">Javascript</option>
-                <option value="java">Java</option>
+                {
+                  skills.map((elem,index)=>(
+                    <option value={elem.label} key={index}>{elem.description}</option>
+                  ))
+                }
               </datalist>
               <button onClick={handleAddSkill} className='bg-gray-400 py-2 px-3'>
                 Add
@@ -109,7 +142,7 @@ const LogForm = (props) => {
             <button className='
             font-semibold bg-[#71C55D] hover:bg-green-500 text-white px-6 py-2 
             rounded-full transition-colors duration-200 cursor-pointer w-full md:w-auto'
-            // onClick={()=>handleSubmit()}
+            onClick={()=>handleSubmit()}
             >
             Generate
           </button>
@@ -122,10 +155,10 @@ const LogForm = (props) => {
         </div>
         <div>
           {guidanceSkills && (
-            <h3 className='text-xl font-semibold mb-2'>{career.length>4 && careers.includes(career)?handleChangeToCapital(career):"Choose a career"}</h3>
+            <h3 className='text-xl font-semibold mb-2'>{career.length>4 ? handleChangeToCapital(career):"Choose a career"}</h3>
           )}
           <ol className='list-decimal list-inside space-y-1'>
-            {skills.map((skill,index)=>(
+            {selectedSkills.map((skill,index)=>(
               <li key={index}>{skill}</li>
             ))}
           </ol>

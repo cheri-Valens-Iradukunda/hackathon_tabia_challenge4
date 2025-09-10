@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LogForm from "./components/guidancePage/LogForm";
 
  
 const Arrays =({id,title,description, resource,links}) =>{
+
 
       return (
     
@@ -28,8 +29,16 @@ const Arrays =({id,title,description, resource,links}) =>{
         {id:8,title:"Node.js",description:"find your path  your path do this it's easy you your path by approaching real   path by approaching real world carrer", resource:"Resources:",links:["https://www.instagram.com/reels/DNKx6H0upgv/","https://www.instagram.com/reels/DNKx6H0upgv/"]},
 
     ]
+  const [occupations,setOcupations] = useState([])
+  const [selectedSkills,setSelectedSkills] = useState([])
   const [isPopUp,setIsPopUp] = useState(false)
   const [data,setData ] = useState(datas)
+
+  useEffect(()=>{
+    console.log("returned data")
+    console.log(occupations)
+    console.log(selectedSkills)
+  },[occupations,selectedSkills]);
     
     return (
         <>
@@ -39,7 +48,7 @@ const Arrays =({id,title,description, resource,links}) =>{
           }} className="text-white bg-green-700 px-5 py-2 text-xl me-0 rounded-xl">Search</button>
         </div>
         <div id="popup" className={`${isPopUp ? "block" : "hidden"} bg-gradient-to-br transition-all duration-700 p-5 from-blue-500/25 to-green-500/25  z-100 h-0 w-screen backdrop-blur-lg fixed top-0`}>
-          <LogForm isPopUp = {setIsPopUp}/>
+          <LogForm isPopUp = {setIsPopUp} returnedOccupations = {setOcupations} selectedSkills = {setSelectedSkills}/>
         </div>
         <p className="font-bold text-3xl text-center pt-8 pb-4">Software Development</p>
        <div className="gap-6 p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 w-[90%] h-auto mx-auto">
