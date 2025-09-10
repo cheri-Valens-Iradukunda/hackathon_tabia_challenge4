@@ -46,7 +46,7 @@ const LogForm = (props) => {
     console.log(career)
   },[careerSearch])
   useEffect(()=>{
-    if(skill.length>2){
+    if(skillSearch.length>2){
       searchSkills()
       console.log("skills",skills)
     }
@@ -82,21 +82,21 @@ const LogForm = (props) => {
     console.log(selectedSkills)
   }
 return (
-    <div className='w-full max-w-2xl bg-gray-200 mt-10 -z-2 mx-auto  overflow-hidden rounded-lg shadow'>
+    <div className='w-[75%] h-[70vh] bg-gray-200 mt-10 -z-2 mx-auto overflow-hidden rounded-lg shadow'>
       <div className='w-full relative h-12 flex'>
         <button
           className={`w-1/2 z-10 relative h-full transition-colors duration-200 ${guidanceSkills ? "bg-[#71C55D] font-bold" : ""}`}
           onClick={() => ChangeForm(true)}
           type="button"
         >
-          Skills Guidance
+          Career and Skills Guidance
         </button>
         <button
           className={`w-1/2 z-10 relative h-full transition-colors duration-200 ${!guidanceSkills ? "bg-[#71C55D] font-bold" : ""}`}
           onClick={() => ChangeForm(false)}
           type="button"
         >
-          Career and Skills Guidance
+         Skills Guidance
         </button>
         <div
           className={`bg-[#71C55D] h-full w-1/2 absolute top-0 transition-all duration-200 ${guidanceSkills ? "left-0" : "left-1/2"}`}
@@ -106,46 +106,59 @@ return (
       <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4 p-4 mt-10'>
         <div className='md:col-span-2 grid grid-rows-2 h-fit space-y-4 '>
 
-          <div className='space-y-4'>
-              {guidanceSkills && (
-              <div className=''>
-                <input
-                  type="text"
-                  placeholder='Select Career'
-                  className='bg-gray-300 px-4 w-1/2 outline-none py-2 rounded w-full'
-                  onChange={e=>setCareerSearch(e.target.value)}
-                  value={careerSearch}
-                />
-                <select id="" onChange={e=>setCareer(e.target.value)} className='bg-gray-300 w-1/2 px-4 py-2 outline-none rounded-r'>
-                  {careers.map((elem, index) => (
-                    <option value={elem.id} key={index}>
-                      {elem.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              )}
-            <div className='flex'>
+         <div className='space-y-4'>
+  
+  {guidanceSkills && (
+    <div>
+      <input
+        type="text"
+        placeholder='Search Career'
+        className='px-4 outline-none py-2 w-[65%] bg-gray-300  rounded-l'
+        onChange={e => setCareerSearch(e.target.value)}
+        value={careerSearch}
+      />
+      <select
+        onChange={e => setCareer(e.target.value)}
+         className={`bg-gray-400 py-2 px-4 outline-none rounded ${
+    careerSearch.length > 3 ? "mt-2 relative w-[65%]" : "absolute top-0 left-0 w-[65%]"
+  }`}
+      >
+        <option value="choose" disabled>choose</option>
+        {careers.map((elem, index) => (
+          <option value={elem.id} key={index}>
+            {elem.label}
+          </option>
+        ))}
+      </select>
+    </div>
+)}
 
-              <input
-                type="text"
-                placeholder='Select your skill'
-                className={`bg-gray-300 px-4 py-2 outline-none rounded-l w-full ${!guidanceSkills ? "block":"hidden"}`}
-                onChange={e=>setSkill(e.target.value)}
-                list='skills'
-                value={skill}
-              />
-              <select id='skills' className={`w-1/2 ${!guidanceSkills ? "block":"hidden"}`} onChange={e=>handleAddSkill(e.target.value)}>
-                {
-                  skills.map((elem,index)=>(
-                    <option value={elem.label} key={index}>{elem.label}</option>
-                  ))
-                }
-              </select>
-              
-            </div>
-          </div>
-          <div className='flex justify-between h-fit'>
+  
+  <div>
+    <input
+      type="text"
+      placeholder='Search Skill'
+      className="px-4 outline-none py-2 w-[65%] bg-gray-300 rounded-t" 
+      onChange={e => setSkillSearch(e.target.value)}
+      value={skillSearch}
+      />
+    <select
+      onChange={e => handleAddSkill(e.target.value)}
+      className={`bg-gray-400 py-2 px-4 outline-none rounded ${
+    skillSearch.length > 3 ? "mt-2 relative w-[65%]" : "absolute top-0 left-0 w-[65%]"
+  }`}
+      >
+      <option value="choose" disabled>choose</option>
+      {skills.map((elem, index) => (
+        <option value={elem.label} key={index}>
+          {elem.label}
+        </option>
+      ))}
+    </select>
+  </div>
+</div>
+
+          <div className='flex gap-x-10 h-fit mt-10'>
             <button className='
             font-semibold bg-[#71C55D] hover:bg-green-500 text-white px-6 py-2 
             rounded-full transition-colors duration-200 cursor-pointer w-full md:w-auto'
