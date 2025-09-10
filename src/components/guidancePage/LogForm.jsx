@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Api } from '../../endpoints/Apis';
-// import { FaPlus } from 'react-icons/fa';
+import { RxCross2 } from "react-icons/rx";
 
 const LogForm = (props) => {
   const [guidanceSkills,setguidanceSkills] = useState(true);
@@ -33,8 +33,10 @@ const LogForm = (props) => {
 
   let handleAddSkill = (skill) =>{
     console.log(skill)
-    setSelectedSkills(current => [...current, skill])
+    let skillId = skills.filter(elem=>elem.label===skill)[0];
+    setSelectedSkills(current => [...current, [skill,skillId.id]])
     setSkill("")
+    setSkills([])
     console.log(selectedSkills)
   }
   useEffect(()=>{
@@ -50,24 +52,35 @@ const LogForm = (props) => {
     }
     },[skill])
   let handleChangeToCapital = (career) => {
-    return career.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+    let careerName = careers.filter(elem=>elem.id===career)[0].label
+    return careerName.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
   }
   let ChangeForm = (guidance) =>{
     setguidanceSkills(guidance)
     setCareer("")
-    setSkills([])
+    // setSkills([])
   }
 
-
  let handleSubmit = async() =>{
-    console.log(career)
-    const res = await axios.post(`${Api}/api/careersFetch`,{career});
-      console.log(res.data)
+    let res;
+    if(!guidanceSkills){
+      console.log("skills",selectedSkills)
+      let newSkills = selectedSkills.map(elem=>elem[1])
+      console.log(newSkills)
+      res = await axios.post(`${Api}/api/careerFromSkills`,newSkills);
+    }else{
+      res = await axios.post(`${Api}/api/careersFetch`,{career});
+        console.log(res.data)
+
+    }
     props.returnedOccupations(res.data)
     props.selectedSkills(selectedSkills)
     props.isPopUp(false)
   }
-
+  let handleRemoveSkill = (index) =>{
+    setSelectedSkills(curr=>curr.filter((elem,idx)=>idx!==index))
+    console.log(selectedSkills)
+  }
 return (
     <div className='w-[75%] h-[70vh] bg-gray-200 mt-10 -z-2 mx-auto overflow-hidden rounded-lg shadow'>
       <div className='w-full relative h-12 flex'>
@@ -112,7 +125,7 @@ return (
       >
         <option value="choose" disabled>choose</option>
         {careers.map((elem, index) => (
-          <option value={elem.label} key={index}>
+          <option value={elem.id} key={index}>
             {elem.label}
           </option>
         ))}
@@ -166,7 +179,7 @@ return (
           )}
           <ol className='list-decimal list-inside space-y-1'>
             {selectedSkills.map((skill,index)=>(
-              <li key={index}>{skill}</li>
+              <li key={index} className='flex items-center gap-3 list-decimal'>{skill} <span className='text-red-500 text-xl' onClick={()=>handleRemoveSkill(index)}><RxCross2 /></span></li>
             ))}
           </ol>
         </div>
