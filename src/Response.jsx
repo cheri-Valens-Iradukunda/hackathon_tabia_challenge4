@@ -90,7 +90,6 @@ function Response() {
 
           {data.length > cardsPerPage && (
             <div className="px-10 py-4 w-[90%] mx-auto flex items-center justify-between">
-              {/* Previous */}
               <button
                 onClick={() =>
                   setCurrentPage((prev) => Math.max(prev - 1, 1))
