@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Api } from '../../endpoints/Apis';
-// import { FaPlus } from 'react-icons/fa';
+import { RxCross2 } from "react-icons/rx";
 
 const LogForm = (props) => {
   const [guidanceSkills,setguidanceSkills] = useState(true);
@@ -33,8 +33,10 @@ const LogForm = (props) => {
 
   let handleAddSkill = (skill) =>{
     console.log(skill)
-    setSelectedSkills(current => [...current, skill])
+    let skillId = skills.filter(elem=>elem.label===skill)[0];
+    setSelectedSkills(current => [...current, [skill,skillId.id]])
     setSkill("")
+    setSkills([])
     console.log(selectedSkills)
   }
   useEffect(()=>{
@@ -50,36 +52,35 @@ const LogForm = (props) => {
     }
     },[skill])
   let handleChangeToCapital = (career) => {
-    return career.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+    let careerName = careers.filter(elem=>elem.id===career)[0].label
+    return careerName.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
   }
   let ChangeForm = (guidance) =>{
     setguidanceSkills(guidance)
     setCareer("")
-    setSkills([])
+    // setSkills([])
   }
-// {------------ RESEARCHING ACCORDING TO SKILLS ---------------}
-  // let handleSubmit = async() =>{
-  //   console.log(career)
-  //   let newSkills = skills.filter(elem=>selectedSkills.includes(elem.label)).map(elem=>elem.id)
-  //   console.log(newSkills)
-  //   const res = await axios.post(`${Api}/api/careerFromSkills`,newSkills);
-  //     console.log(res.data)
-  //   props.returnedOccupations(res.data)
-  //   props.selectedSkills(selectedSkills)
-  //   props.isPopUp(false)
-  // }
-
-// {------------ RESEARCHING ACCORDING TO CAREER ---------------}
 
  let handleSubmit = async() =>{
-    console.log(career)
-    const res = await axios.post(`${Api}/api/careersFetch`,{career});
-      console.log(res.data)
+    let res;
+    if(!guidanceSkills){
+      console.log("skills",selectedSkills)
+      let newSkills = selectedSkills.map(elem=>elem[1])
+      console.log(newSkills)
+      res = await axios.post(`${Api}/api/careerFromSkills`,newSkills);
+    }else{
+      res = await axios.post(`${Api}/api/careersFetch`,{career});
+        console.log(res.data)
+
+    }
     props.returnedOccupations(res.data)
     props.selectedSkills(selectedSkills)
     props.isPopUp(false)
   }
-
+  let handleRemoveSkill = (index) =>{
+    setSelectedSkills(curr=>curr.filter((elem,idx)=>idx!==index))
+    console.log(selectedSkills)
+  }
 return (
     <div className='w-full max-w-2xl bg-gray-200 mt-10 -z-2 mx-auto  overflow-hidden rounded-lg shadow'>
       <div className='w-full relative h-12 flex'>
@@ -111,24 +112,17 @@ return (
                 <input
                   type="text"
                   placeholder='Select Career'
-                  className='bg-gray-300 px-4 outline-none py-2 rounded w-full'
+                  className='bg-gray-300 px-4 w-1/2 outline-none py-2 rounded w-full'
                   onChange={e=>setCareerSearch(e.target.value)}
                   value={careerSearch}
                 />
-                <select id="" onChange={e=>setCareer(e.target.value)} className='bg-gray-300 px-4 py-2 outline-none rounded-r'>
+                <select id="" onChange={e=>setCareer(e.target.value)} className='bg-gray-300 w-1/2 px-4 py-2 outline-none rounded-r'>
                   {careers.map((elem, index) => (
                     <option value={elem.id} key={index}>
                       {elem.label}
                     </option>
                   ))}
                 </select>
-                {/* <datalist id='careers'>
-                  {
-                    careers.map((elem,index)=>(
-                      <option value={elem.label} key={index}>{elem.description}</option>
-                    ))
-                  }
-                </datalist>   */}
               </div>
               )}
             <div className='flex'>
@@ -136,15 +130,15 @@ return (
               <input
                 type="text"
                 placeholder='Select your skill'
-                className='bg-gray-300 px-4 py-2 outline-none rounded-l w-full'
+                className={`bg-gray-300 px-4 py-2 outline-none rounded-l w-full ${!guidanceSkills ? "block":"hidden"}`}
                 onChange={e=>setSkill(e.target.value)}
                 list='skills'
                 value={skill}
               />
-              <select id='skills' className='w-1/2' onChange={e=>handleAddSkill(e.target.value)}>
+              <select id='skills' className={`w-1/2 ${!guidanceSkills ? "block":"hidden"}`} onChange={e=>handleAddSkill(e.target.value)}>
                 {
                   skills.map((elem,index)=>(
-                    <option value={elem.label} key={index}>{elem.description}</option>
+                    <option value={elem.label} key={index}>{elem.label}</option>
                   ))
                 }
               </select>
@@ -172,7 +166,7 @@ return (
           )}
           <ol className='list-decimal list-inside space-y-1'>
             {selectedSkills.map((skill,index)=>(
-              <li key={index}>{skill}</li>
+              <li key={index} className='flex items-center gap-3 list-decimal'>{skill} <span className='text-red-500 text-xl' onClick={()=>handleRemoveSkill(index)}><RxCross2 /></span></li>
             ))}
           </ol>
         </div>

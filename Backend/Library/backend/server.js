@@ -305,7 +305,7 @@ app.post('/api/careersFetch', (req, res) => {
   const skills = allSkillIds
     .map(sid => data.skillsMap.get(sid))
     .filter(Boolean)
-    .map(s => ({ id: s.ID, label: s.PREFERREDLABEL }));
+    .map(s => ({ id: s.ID, label: s.PREFERREDLABEL, description: s.DESCRIPTION }));
 
   res.json({
     career: { id: occupation.ID, label: occupation.PREFERREDLABEL },
@@ -359,7 +359,7 @@ app.post('/api/careerFromSkills', (req, res) => {
   const allSkills = allSkillIds
     .map(id => data.skillsMap.get(id))
     .filter(Boolean)
-    .map(s => ({ id: s.ID, label: s.PREFERREDLABEL }));
+    .map(s => ({ id: s.ID, label: s.PREFERREDLABEL, description: s.DESCRIPTION }));
 
   const matchedSkills = bestMatch.matchedSkillIds
     .map(id => {
@@ -375,7 +375,7 @@ app.post('/api/careerFromSkills', (req, res) => {
     },
     matchCount: maxMatchCount,
     matchedSkills,
-    allSkills
+    skills:allSkills
   });
 });
 
